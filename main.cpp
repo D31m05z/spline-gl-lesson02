@@ -23,17 +23,16 @@
 #*                                                              *
 #\* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
+
 #include <math.h>
 #include <stdlib.h>
 
 #if defined(WIN32) || defined(_WIN32) || defined(__WIN32__)
-// MsWindows-on ez is kell
 #include <windows.h>
 #endif // Win32 platform
 
 #include <GL/gl.h>
 #include <GL/glu.h>
-// A GLUT-ot le kell tolteni: http://www.opengl.org/resources/libraries/glut/
 #include <GL/glut.h>
 
 #define PI 3.141592653589793238462643383
@@ -135,7 +134,7 @@ public:
 
         glColor3f(color.r, color.g, color.b);
         glBegin(GL_LINE_STRIP);
-        for (uint i = 0; i < numPoints - 3; i++) {
+        for (int i = 0; i < numPoints - 3; i++) {
             float dt = limit(i + 2) - limit(i + 1);
             for (float t = 0; t < dt; t += 0.01f) {
                 vec2 vertex = getPoint(i, t);
@@ -144,7 +143,7 @@ public:
         }
         glEnd();
 
-        for (uint i = 0; i < numPoints - 1; i++)
+        for (int i = 0; i < numPoints - 1; i++)
             drawCircle(points[i].x, points[i].y, radius);
 
         numPoints--;
@@ -263,9 +262,9 @@ private:
     uint type;
     Color color;
     vec2 points[100];
-    uint numPoints;
+    int numPoints;
     float timeD;
-    uint segment;
+    int segment;
 } splineCR(CR, Color(1, 0, 0)), splineCRI(CRI, Color(0, 1, 0));
 
 void onInitialization() {
